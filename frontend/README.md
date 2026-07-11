@@ -1,75 +1,45 @@
-# React + TypeScript + Vite
+# Frontend: Crew Voucher UI
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Aplikasi client-side dibangun dengan React, TypeScript, dan Tailwind CSS.
 
-Currently, two official plugins are available:
+## 🚀 Fitur Utama
+- Form input yang responsif untuk pendaftaran voucher kru.
+- Validasi data sisi klien sebelum dikirim ke API.
+- Status loading dan error handling yang user-friendly.
+- Integrasi otomatis dengan Nginx sebagai Reverse Proxy.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## 🛠 Tech Stack
+- Framework: React 18+ (Vite)
+- Language: TypeScript
+- Styling: Tailwind CSS v4
+- State Management: React useState
+- API Client: Fetch API
 
-## React Compiler
+## 📦 Struktur Folder
+/frontend
+├── /src
+│   ├── /components  # Komponen UI (Form, Status, dll)
+│   ├── /api         # Service untuk komunikasi dengan Backend
+│   ├── /types       # Definisi interface TypeScript
+│   └── App.tsx      # Main application component
+├── nginx.conf       # Konfigurasi Nginx untuk Reverse Proxy
+└── Dockerfile       # Konfigurasi multi-stage build
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## ⚙️ Cara Menjalankan (Lokal)
+1. Masuk ke folder frontend:
+   cd frontend
+2. Install dependensi:
+   npm install
+3. Jalankan development server:
+   npm run dev
 
-## Expanding the ESLint configuration
+## 🌐 Konfigurasi
+- Environment: Gunakan file .env untuk mengatur VITE_API_BASE_URL (disarankan menggunakan '/api').
+- Proxy: Nginx di dalam Docker secara otomatis melakukan proxy dari jalur '/api' ke container backend (port 8080).
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 💡 Troubleshooting
+- CORS Error: Pastikan pemanggilan API menggunakan path '/api' agar diproses oleh Nginx, bukan menembak langsung ke port 8080 backend.
+- Build Error: Pastikan versi Node.js di environment Anda sesuai dengan versi yang digunakan di Dockerfile (Node 20+).
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
-
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
-
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
-```
+---
+*Dokumentasi ini digunakan untuk mempermudah pengembangan antarmuka pengguna.*

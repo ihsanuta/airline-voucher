@@ -1,0 +1,18 @@
+
+services:
+  frontend:
+    build: ./frontend
+    container_name: crew-voucher-frontend
+    ports:
+      - "8000:8000"
+    depends_on:
+      - backend
+
+  backend:
+    build: ./backend
+    container_name: crew-voucher-backend
+    ports:
+      - "8080:8080"
+    # Tambahkan environment variable yang dibutuhkan backend di sini
+    environment:
+      - NODE_ENV=production

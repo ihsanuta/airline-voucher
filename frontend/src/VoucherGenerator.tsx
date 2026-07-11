@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-// Menggunakan "import type" sesuai aturan TypeScript Vite terbaru
-import type { VoucherFormState, AircraftType } from './types';
+import type { VoucherFormState } from './types';
 import { VoucherService } from './api';
 
 export default function VoucherGenerator() {

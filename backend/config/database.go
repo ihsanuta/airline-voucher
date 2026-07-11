@@ -3,6 +3,8 @@ package config
 import (
 	"database/sql"
 	"log"
+	"os"
+	"path/filepath"
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/sqlite3"
@@ -27,9 +29,13 @@ func InitDatabase(dbPath string) (*sql.DB, error) {
 		return nil, err
 	}
 
+	dir, _ := os.Getwd()
+	// Gabungkan dengan path migrasi
+	migrationPath := "file://" + filepath.Join(dir, "db", "migrations")
+
 	// Menunjuk ke folder db/migration
 	m, err := migrate.NewWithDatabaseInstance(
-		"file://db/migrations",
+		migrationPath,
 		"sqlite3", driver)
 	if err != nil {
 		return nil, err

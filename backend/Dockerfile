@@ -1,5 +1,5 @@
 # Stage 1: Build
-FROM golang:1.21-alpine AS builder
+FROM golang:1.26.3-alpine AS builder
 
 # Install build tools untuk sqlite3 CGO
 RUN apk add --no-cache gcc musl-dev
@@ -18,6 +18,7 @@ RUN apk add --no-cache ca-certificates tzdata
 
 WORKDIR /app
 COPY --from=builder /app/main .
+COPY --from=builder /app/db/migrations ./db/migrations
 
 EXPOSE 8080
 CMD ["./main"]
